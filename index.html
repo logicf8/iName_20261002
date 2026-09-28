@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iName</title>
+  <link rel="icon" href="./app/pageControl/pics/lazyrabbitico.ico" type="image/x-icon">
+  
+  <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill-image-resize-module@3.0.0/image-resize.min.js"></script>
+  
+  <script type="module" src="./app/app.js"></script>
+  <link rel="stylesheet" href="./app/pageControl/styles/base.css">
+  <link rel="stylesheet" href="./app/mainPage/styles/mainPage.css">
+  <link rel="stylesheet" href="./app/pageControl/styles/toggles.css">
+  <link rel="stylesheet" href="./app/coachPage/styles/coach.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/components/switch.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/components/buttons.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/components/combobox.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/calc-table.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/calc-base.css">
+  <link rel="stylesheet" href="./app/calcPage/chainCalc/styles/chain-calc.css">
+  <link rel="stylesheet" href="./app/calcPage/susRailCalc/styles/susRail.css">
+  <link id="themeStylesheet" rel="stylesheet" href="./app/pageControl/styles/theme-blue.css">
+</head>
+<body>
+
+  <!-- Vyväxlare (Uppe till vänster) -->
+  <div class="view-toggle-wrapper">
+    <div class="switch view-switch">
+      <!-- Radioknappar med ändrad ordning: main, calc, coach -->
+      <input type="radio" id="viewMain" name="viewToggleRadio" value="main" checked>
+      <input type="radio" id="viewCoach" name="viewToggleRadio" value="coach">
+      <input type="radio" id="viewCalc" name="viewToggleRadio" value="calc">
+
+      <!-- Klickbara ytor i samma ordning -->
+      <label for="viewMain" class="toggle-segment" title="CopyTool"></label>
+      <label for="viewCoach" class="toggle-segment" title="Coach"></label>
+      <label for="viewCalc" class="toggle-segment" title="Kalkyl"></label>
+      <!-- Den flyttbara vita kulan -->
+      <span class="slider round"></span>
+    </div>
+
+    <!-- Textundertext vid hover (uppdaterad ordning) -->
+    <div class="view-toggle-labels">
+      <span>Copy</span>
+      <span>OC</span>
+      <span>Calc</span>
+    </div>
+  </div>
+
+  <!-- Temaväxlare (Uppe till höger) -->
+  <div class="theme-toggle-wrapper">
+    <div class="switch theme-switch">
+      <!-- Radioknappar med name="themeToggleRadio" och tillhörande value -->
+      <input type="radio" id="themeBlue" name="themeToggleRadio" value="default" checked>
+      <input type="radio" id="themePink" name="themeToggleRadio" value="pink">
+      <input type="radio" id="themeBlack" name="themeToggleRadio" value="black">
+
+      <!-- Klickbara ytor -->
+      <label for="themeBlue" class="toggle-segment"></label>
+      <label for="themePink" class="toggle-segment"></label>
+      <label for="themeBlack" class="toggle-segment"></label>
+
+      <!-- Den flyttbara vita kulan -->
+      <span class="slider"></span>
+    </div>
+
+    <div class="theme-toggle-labels">
+      <span>Blue</span>
+      <span>Pink</span>
+      <span>Beige</span>
+    </div>
+  </div>
+
+  <!-- Ursprunglig sida -->
+  <main id="mainView">
+    <div class="container">
+      <h1>iName | CopyTool</h1>
+      <textarea id="inputText" placeholder="Klistra in din artikellista här..." autofocus></textarea>
+      <button id="processBtn">Bearbeta text</button>
+      <div class="button-row">
+        <button id="ritningsBtn" class="secondary-btn">RitningsNR</button>
+        <button id="aliasBtn" class="secondary-btn">Alias</button>
+        <button id="internTextBtn" class="secondary-btn">InternText</button>
+        <button id="belongTextBtn" class="secondary-btn">Tillhör</button>
+      </div> 
+      <div id="emojiDescription">
+        <h3 id="missingH3">[🚨] = text kan behöva korrigeras</h3>
+        <h3 id="expH3">[🔔] = innehåller produkt som har utgått</h3>
+      </div>
+      <div id="displayContainer">
+        <ul id="displayList"></ul>
+      </div>
+      <h2 id="minH2" style="text-align:left"> Senast kopierat</h2>
+      <div id="copyStatus">Ingen rad kopierad ännu</div>
+      <h2 id="minAndraH2" style="text-align:left"> Nästa att kopiera (redigerbar)</h2>
+      <textarea id="editText" placeholder="Redigera texten som ska kopieras..."></textarea>
+      <button id="copyBtn">Kopiera aktuell rad</button>
+    </div>
+    <div class="checkMainContainer">
+      <div class="checkTxtContainer"></div>
+      <div class="zoomResultContainer" style="display:none;"></div>
+    </div>
+    <div class="reportExpContainer"></div>
+    <div class="reportContainer">
+    </div>
+  </main>
+
+  <!-- Ny sida (Visas när pageToggle är aktiv) -->
+  <main id="coachView" class="container coach-main-wrapper" style="display: none;">
+
+    <!-- Övre raden med Coach, Säljare och Kund -->
+    <div class="coach-container">
+      <div class="coach-logo">OC</div>
+      <div class="coach-field-group coach-fixed">
+        <label for="coachText">Coach:</label>
+        <input type="text" id="coachText" maxlength="10" placeholder="">
+      </div>
+
+      <div class="coach-field-group coach-fixed">
+        <label for="sellerText">Säljare:</label>
+        <input type="text" id="sellerText" maxlength="10" placeholder="">
+      </div>
+
+      <div class="coach-field-group coach-fill">
+        <label for="customerText">Kund:</label>
+        <input type="text" id="customerText" placeholder="">
+      </div>
+    </div>
+    <div class="dekorativ-linje"></div>
+
+    <!-- nKP Container -->
+    <div class="expandable-container disabled-state is-empty" id="nkpContainer">
+      <div class="expandable-header">
+        <button type="button" id="nkpBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">nKP</span>
+      </div>
+      <div id="nkpText"></div>
+    </div>
+
+    <!-- Bänkskivor Container -->
+    <div class="expandable-container disabled-state is-empty" id="wtContainer" style="display: none;">
+      <div class="expandable-header">
+        <button type="button" id="wtBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">Bänkskivor (måttbeställda)</span>
+
+        <div class="approved-group">
+          <label class="approved-radio-label">
+            <input type="radio" name="wtStatus" value="godkant" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ok</span>
+            <span class="label-text-print">👍 Bra jobbat</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wtStatus" value="komplettering" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ok med notis</span>
+            <span class="label-text-print">👍 ✍️ Text- komplettering via internt i order</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wtStatus" value="ny-import" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ny import</span>
+            <span class="label-text-print">🥺 Beklagar, ny import krävs</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wtStatus" value="kan-inte-avgora" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Kan inte avgöra</span>
+            <span class="label-text-print">💬 Jag behöver lite mer information</span>
+          </label>
+        </div>
+      </div>
+      <div id="wtText"></div>
+    </div>
+
+    <!-- Väggplattor Container -->
+    <div class="expandable-container disabled-state is-empty" id="wpContainer" style="display: none;">
+      <div class="expandable-header">
+        <button type="button" id="wpBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">Väggplattor (måttbeställda)</span>
+
+        <div class="approved-group">
+          <label class="approved-radio-label">
+            <input type="radio" name="wpStatus" value="godkant" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ok</span>
+            <span class="label-text-print">👍 Bra jobbat</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wpStatus" value="komplettering" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ok med notis</span>
+            <span class="label-text-print">👍 ✍️ Text- komplettering via internt i order</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wpStatus" value="ny-import" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Ny import</span>
+            <span class="label-text-print">🥺 Beklagar, ny import krävs</span>
+          </label>
+          <label class="approved-radio-label">
+            <input type="radio" name="wpStatus" value="kan-inte-avgora" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Kan inte avgöra</span>
+            <span class="label-text-print">💬 Jag behöver lite mer information</span>
+          </label>
+        </div>
+      </div>
+      <div id="wpText"></div>
+    </div>
+
+    <!-- Hantverksritning Container -->
+    <div class="expandable-container disabled-state is-empty" id="hrContainer" style="display: none;">
+      <div class="expandable-header">
+        <button type="button" id="hrBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">Hantverksritning</span>
+
+        <div class="approved-group">
+          <label class="approved-radio-label">
+            <input type="checkbox" id="hrStatus" class="approved-radio">
+            <span class="custom-checkbox"></span>
+            <span class="label-text-screen">Se utskrift</span>
+            <span class="label-text-print">🖨️ Se utskrift för önskad korrigering</span>
+          </label>
+        </div>
+      </div>
+      <div id="hrText"></div>
+    </div>
+
+    <!-- SäljaPro Order Container (Huvudcontainer) -->
+    <div class="expandable-container disabled-state is-empty" id="saljaProMainContainer" style="display: none;">
+      <div class="expandable-header">
+        <button type="button" id="saljaProMainBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">SäljaPro- order: (Nummer nedan samma som i SäljaPro- order)</span>
+      </div>
+      <!-- Här genereras sub-containrarna dynamiskt -->
+      <div id="saljaProSubContainers" class="salja-pro-sub-wrapper"></div>
+    </div>
+
+    <!-- Övrigt Container -->
+    <div class="expandable-container disabled-state is-empty" id="ovrigtContainer">
+      <div class="expandable-header">
+        <button type="button" id="ovrigtBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">Övrigt</span>
+      </div>
+      <div id="ovrigtText"></div>
+    </div>
+
+    <!-- Tips Container -->
+    <div class="expandable-container disabled-state is-empty" id="tipsContainer">
+      <div class="expandable-header">
+        <button type="button" id="tipsBtn" class="expand-btn" aria-label="Expandera"></button>
+        <span class="expandable-label">Tips</span>
+      </div>
+      <div id="tipsText"></div>
+    </div>
+
+    <!-- Final Container (Avslutningsvis) -->
+    <div class="expandable-container disabled-state is-empty" id="finalContainer">
+      <div class="expandable-header">
+        <button type="button" id="finalBtn" class="expand-btn" aria-label="Expandera"></button>
+        
+        <span class="expandable-label"></span>
+        
+        <div class="final-select-group">
+          <select id="finalSelect" class="final-dropdown">
+            <!-- Fylls dynamiskt från app/coachPage/config/finalOptions.js -->
+          </select>
+        </div>      
+      </div>
+      <div id="finalText"></div>
+    </div>
+
+  </main>
+
+  <!-- Kalkyl-vy -->
+  <main id="calcView" class="container" style="display: none;">
+    <div class="calc-content">
+      
+      <!-- TABBAR FÖR KALKYLATORER (Matchade med SusRail-designen) -->
+      <div class="calc-main-tabs">
+        <button type="button" class="calc-tab-btn active" data-tab="mattkedjan">Måttkedjan</button>
+        <button type="button" class="calc-tab-btn" data-tab="susrail">Antals- beräkning</button>
+        <button type="button" class="calc-tab-btn" data-tab="coverPanel">🚧 Täcksidor 🚧</button>
+      </div>
+
+      <!-- FLIK 1: Måttkedjan -->
+      <div id="tab-mattkedjan" class="calc-tab-content active">
+        <div class="calc-container">
+          <h1>Måttkedjan</h1>
+          <div class="header-row">
+            <div class="toggle-left">
+              <span class="toggle-label">Lägg till 00 [ t ]</span>
+              <label class="switch calc-switch">
+                <input type="checkbox" id="zero-toggle">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            
+            <div id="summary-field" class="summary">Summa = 0 mm</div>
+            
+            <div class="header-right-actions">
+              <div id="mirror-btn" class="mirror-button" title="Spegelvänd beräkning">🪞</div>
+              <button type="button" id="btn-clear" class="control-btn clear-icon-button" title="Rensa input och inställningar">🗑️</button>
+            </div>
+          </div>
+          
+          <input type="text" id="calc-input" class="calc-input" autofocus placeholder="Skriv måttkedja: -2+30+400+d600+...">
+          
+          <!-- Rad 1: Diskho och Häll delar på bredden -->
+          <div class="action-buttons-row">
+            <button type="button" id="btn-diskho" class="action-btn">Diskho [ d ]</button>
+            <button type="button" id="btn-hall" class="action-btn">Häll [ h ]</button>
+            <button type="button" id="btn-skarv" class="action-btn">Skarv [ s ]</button>
+            <button type="button" id="btn-hallskarv" class="action-btn">Hällskarv [ hs ]</button>
+          </div>
+
+          <!-- Rad 2: Togglar för djupavdrag, COS/COB och Hällskarv -->
+          <div class="toggles-row">
+            <div class="depth-deduction-container">
+              <span class="toggle-label">Avdrag djup [ a ]</span>
+              <label class="switch calc-switch">
+                <input type="checkbox" id="depth-toggle">
+                <span class="slider round"></span>
+              </label>
+
+              <div id="radio-group" class="radio-group">
+                <input type="text" id="depth-value-left" class="depth-input" value="635" maxlength="4">
+                <label class="radio-label">
+                  <input type="radio" name="side-selection" value="left" checked>
+                  <span>Vä</span>
+                </label>
+                <input type="text" id="depth-value-right" class="depth-input" value="635" maxlength="4">
+                <label class="radio-label">
+                  <input type="radio" name="side-selection" value="right">
+                  <span>Hö</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="side-selection" value="both">
+                  <span>Båda</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="cos-container">
+              <span class="toggle-label">COS/COB [ c ]</span>
+              <label class="switch calc-switch">
+                <input type="checkbox" id="cos-toggle">
+                <span class="slider round"></span>
+              </label>
+
+              <div id="cos-group" class="cos-group">
+                <span class="toggle-label">COS/COB:</span>
+                <select id="cos-select" class="cos-select">
+                  <option value="127">127</option>
+                  <option value="142">142</option>
+                  <option value="145" selected>145</option>
+                  <option value="165">165</option>
+                </select>
+
+                <span class="toggle-label">Avrinning:</span>
+                <label class="radio-label">
+                  <input type="radio" name="cos-drain-selection" value="left" checked>
+                  <span>Vänster</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="cos-drain-selection" value="right">
+                  <span>Höger</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="hallskarv-container">
+              <span class="toggle-label">Häll skarv [h+s]</span>
+              <label class="switch calc-switch">
+                <input type="checkbox" id="hallskarv-toggle">
+                <span class="slider round"></span>
+              </label>
+
+              <div id="hallskarv-group" class="hallskarv-group">
+                <span class="toggle-label">Häll mått:</span>
+                <input type="text" id="hs-value-input" class="depth-input hs-input" value="560" maxlength="5">
+
+                <label class="radio-label">
+                  <input type="radio" name="hs-side-selection" value="left" checked>
+                  <span>Vä</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="hs-side-selection" value="right">
+                  <span>Hö</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-action-row">
+            <button type="button" id="btn-reload-calc" class="control-btn clear-all-btn">Rensa allt</button>
+            <button type="button" id="btn-add-chain" class="control-btn chain-btn">Lägg till måttkedja</button>
+          </div>
+
+          <div id="calculations-btn-container" class="calculations-btn-container"></div>
+
+          <div id="chains-container" class="chains-container"></div>
+        </div>
+      </div>
+
+      <!-- FLIK 2: SusRail -->
+      <div id="tab-susrail" class="calc-tab-content">
+        <div id="susRailContainer"></div>
+      </div>
+      <div id="tab-coverPanel" class="calc-tab-content" style="display: none;">
+        <div id="coverPanelContainer" class="calc-container">
+          </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
