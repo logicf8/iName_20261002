@@ -1,0 +1,64 @@
+:root {
+  --main: #0558a3;
+  --main-dark: #004f93;
+  --main-light: #f0f6fc;
+
+  --accent: #ffdb00;
+  --accent-dark: #f8d300;
+  --btn-hover-accent: var(--main-dark);
+
+  --bg-main: #d8e2ef;
+  --bg-card: #ffffff;
+  --bg-light: #fafafa;
+  --bg-copy: #FFF9DB;
+
+  --border-light: #b6c4d89f;
+  --border-soft: #0058a3;
+  --border-main: #8aa4d3;
+  --border-copyBtn: #e6e6e6;
+
+  --text-dark: #111;
+  --text-light: #ffffff;
+  --text-button: #0558a3;
+
+  --surface: #ffffff;
+  --surface-alt: #f9f9f9;
+  --surface-alt-2: #f1f6fb;
+
+  --divider: #ccc;
+
+  --shadow: rgba(0,0,0,0.08);
+
+  --badge-bg: #000;
+  --badge-text: #fff;
+
+  --danger: rgb(212, 2, 2);
+
+  --toggleBtn: #ffffff;
+
+  --h1-line-width: 260px;
+}
+
+/* Utskriftsfärg för blått tema – täcker både mainView och coachView */
+@media print {
+  /* Alla vanliga rubriker */
+  h1, h2, h3,
+  
+  /* Loggan OC */
+  .coach-logo,
+  #coachView .coach-logo,
+  
+  /* Alla sektionsrubriker och etiketter i coachView */
+  .expandable-label,
+  .expandable-header,
+  #coachView label,
+  #coachView .expandable-label,
+  #coachView .coach-field-group label,
+  
+  /* Rubriker som skapats inne i Quill-textredigerarna */
+  #coachView .ql-editor h1,
+  #coachView .ql-editor h2,
+  #coachView .ql-editor h3 {
+    color: #1d4080 !important;
+  }
+}

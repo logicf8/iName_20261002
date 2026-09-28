@@ -1,0 +1,171 @@
+/* app/pageControl/styles/toggles.css */
+
+/* ==========================================================================
+   Toggles & Switch Controls (Vyväxlare & Temaväxlare)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Gemensamma basstilar för 3-vägsswitchar
+   -------------------------------------------------------------------------- */
+
+/* Klickbara segment inuti 3-vägsswitch */
+.toggle-segment {
+  flex: 1;
+  height: 100%;
+  z-index: 3;
+}
+
+/* Dölj alla radioknappar inuti switchar */
+.switch input[type="radio"] {
+  display: none;
+}
+
+/* Gemensam stil för både Vy- och Temaväxlare */
+.switch.view-switch,
+.switch.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 70px;
+  height: 24px;
+  box-sizing: border-box;
+  background-color: var(--border-light, #e0e0e0);
+  border-radius: 24px;
+  transition: background-color 0.3s ease;
+}
+
+/* Den vita runda knappen (kulan) i switcharna */
+.switch.view-switch .slider,
+.switch.theme-switch .slider {
+  position: absolute;
+  top: 3.25px;
+  left: 3.25px;
+  z-index: 2;
+  width: 17.5px;
+  height: 17.5px;
+  margin: 0;
+  background-color: var(--toggleBtn);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch.view-switch .slider::before,
+.switch.theme-switch .slider::before {
+  display: none;
+}
+
+/* Gemensamma etiketter för båda switchar (Visas vid hover) */
+.view-toggle-labels,
+.theme-toggle-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+  margin-top: 4px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.view-toggle-labels span,
+.theme-toggle-labels span {
+  flex: 1;
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--text-color, #666666);
+  text-align: center;
+  letter-spacing: 0.02rem;
+}
+
+.view-toggle-wrapper:hover .view-toggle-labels,
+.theme-toggle-wrapper:hover .theme-toggle-labels {
+  opacity: 0.8;
+  visibility: visible;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. Vyväxlare (Uppe till VÄNSTER: Copy / OC / Calc)
+   -------------------------------------------------------------------------- */
+
+.view-toggle-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .view-toggle-wrapper {
+    position: fixed;
+    top: 10px;
+    left: min(10px, calc(50% - 485px));
+  }
+}
+
+/* Positionsändringar för vyväxling */
+#viewMain:checked ~ .slider {
+  transform: translateX(0px);
+}
+
+#viewCoach:checked ~ .slider {
+  transform: translateX(23px);
+}
+
+#viewCalc:checked ~ .slider {
+  transform: translateX(46px);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Temaväxlare (Uppe till HÖGER: Blue / Pink / Black)
+   -------------------------------------------------------------------------- */
+
+.theme-toggle-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 990px) {
+  .theme-toggle-wrapper {
+    position: fixed;
+    top: 10px;
+    right: min(10px, calc(50% - 485px));
+  }
+}
+
+/* Positionsändringar för temaväxling */
+#themeBlue:checked ~ .slider {
+  transform: translateX(0px);
+}
+
+#themePink:checked ~ .slider {
+  transform: translateX(23px);
+}
+
+#themeBlack:checked ~ .slider {
+  transform: translateX(46px);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Utskriftsanpassning (Print)
+   -------------------------------------------------------------------------- */
+
+@media print {
+  .switch,
+  .switch-left,
+  .switch-right,
+  .view-toggle-wrapper,
+  .theme-toggle-wrapper {
+    display: none !important;
+  }
+}

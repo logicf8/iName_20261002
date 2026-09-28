@@ -1,0 +1,58 @@
+/*RoseBeige - Medelmättnad*/
+:root {
+  --main: #7e4b56;
+  --main-dark: #5b2f3a;
+  --main-light: #f8ecee;
+
+  --accent: #e8a9a0;
+  --accent-dark: #d2897e;
+  --btn-hover-accent: #ffffff;
+
+  --bg-main: #ede3d8;
+  --bg-card: #ffffff;
+  --bg-light: #fcf8f5;
+  --bg-copy: #FFF9DB;
+
+  --border-light: #dad0c5;
+  --border-soft: #7e4b56;
+  --border-main: #beafa0;
+  --border-copyBtn: #e6e6e6;
+
+  --text-dark: #2b2123;
+  --text-light: #ffffff;
+  --text-button: #5b2f3a;
+
+  --surface: #ffffff;
+  --surface-alt: #f7f0e8;
+  --surface-alt-2: #efe4d8;
+
+  --divider: #dad0c5;
+
+  --shadow: rgba(126, 75, 86, 0.1);
+
+  --badge-bg: #2b2123;
+  --badge-text: #ffffff;
+
+  --danger: #ad2436;
+
+  --toggleBtn: #ffffff;
+
+  --h1-line-width: 295px;
+}
+
+/* Utskriftsfärg för krämbeige & roséguld */
+@media print {
+  h1, h2, h3,
+  .coach-logo,
+  #coachView .coach-logo,
+  .expandable-label,
+  .expandable-header,
+  #coachView label,
+  #coachView .expandable-label,
+  #coachView .coach-field-group label,
+  #coachView .ql-editor h1,
+  #coachView .ql-editor h2,
+  #coachView .ql-editor h3 {
+    color: #452129 !important;
+  }
+}
