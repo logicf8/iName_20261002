@@ -1,0 +1,154 @@
+/* app/calcPage/styles/calc-base.css */
+
+/* ==========================================================================
+   Generell Kalkylator-Layout (Gemensam bas för alla kalkylatorer)
+   ========================================================================== */
+
+.calc-container {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: 0 0 8px 8px; /* Endast rundade hörn i botten */
+  border: 1px solid var(--border-main);
+  border-top: none; /* Ingen översta linje – ligger kloss an mot fliklinjen */
+  box-shadow: 0 8px 24px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Visa rubrikerna för måttkedja och SäljaPro */
+#chains-title,
+#saljapro-title {
+  display: block;
+  text-align: left;
+  margin: 10px 0 -8px 0; /* Justera avståndet runt rubrikerna efter behov */
+}
+
+/* Toppraden */
+.calc-container .header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+}
+
+.calc-container .toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.calc-container .summary {
+  flex-grow: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  background-color: var(--surface-alt-2);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  user-select: none;
+}
+
+.calc-container .header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.calc-container .toggle-label {
+  user-select: none;
+}
+
+.calc-container .calc-input {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  background-color: var(--bg-card);
+}
+
+.calc-container .calc-input:focus {
+  border-color: var(--main);
+  box-shadow: 0 0 0 2px var(--main-light);
+}
+
+/* Raden längst ned */
+.calc-container .bottom-action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--divider);
+  padding-top: 15px;
+}
+
+/* ==========================================================================
+   Huvudflikar för kalkylatorn (Matchad med SusRail-tabbar)
+   ========================================================================== */
+
+.calc-main-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-main);
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+}
+
+/* Tab-knapparna */
+.calc-main-tabs .calc-tab-btn {
+  flex: 1;
+  text-align: center;
+  background-color: var(--bg-main);
+  color: var(--text-button);
+  border: 1px solid var(--border-light);
+  border-bottom: none;
+  padding: 10px 12px;
+  border-radius: 6px 6px 0 0;
+  font-weight: 500;
+  font-size: 14px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+  margin-bottom: -1px;
+}
+
+.calc-main-tabs .calc-tab-btn:hover {
+  background-color: var(--main-light);
+  color: var(--main);
+}
+
+.calc-main-tabs .calc-tab-btn.active {
+  background-color: var(--main);
+  color: var(--text-light, #ffffff);
+  border-color: var(--main);
+  z-index: 1;
+}
+
+/* Innehållsektioner för flikarna */
+.calc-tab-content {
+  display: none;
+}
+
+.calc-tab-content.active {
+  display: block;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+/* Animeringsregel */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

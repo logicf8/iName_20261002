@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Tabell & Skräddarsydd Combobox (Gemensam komponent)
+   ========================================================================== */
+
+/* Tabell för resultat */
+.chain-table-wrapper {
+    margin-bottom: 15px;
+    overflow-x: auto;
+    border: 1px solid var(--border-main);
+    border-radius: 6px;
+    background-color: var(--bg-card);
+}
+
+.chain-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.chain-table tr {
+    display: table-row;
+}
+
+.chain-table th {
+    display: table-cell;
+    background-color: var(--surface-alt-2);
+    color: var(--text-dark);
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--border-main);
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.chain-table td {
+    display: table-cell;
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-dark);
+    vertical-align: middle;
+    height: 48px;
+    box-sizing: border-box;
+}
+
+.chain-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   Gemensam Kolumnlinjering för #chain-table och #vp-table
+   ========================================================================== */
+
+#chain-table, 
+#vp-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+/* Kolumn 1: Längd (Ökad padding för lite extra luft till vänster) */
+#chain-table .col-length, #vp-table .col-length { 
+    width: 15%; 
+    text-align: left; 
+    padding-left: 12px; 
+}
+
+#chain-table .col-depth,    #vp-table .col-height   { width: 15%; text-align: left; }
+#chain-table .col-kvadrat,  #vp-table .col-kvadrat  { width: 10%; text-align: left; }
+#chain-table .col-lopmeter, #vp-table .col-lopmeter { width: 15%; text-align: left; }
+
+/* Kolumn 5 för #chain-table (Centrerad "Åtgärd"-rubrik och knappar) */
+#chain-table .col-actions { 
+    width: 45%; 
+    text-align: right; 
+}
+
+/* Kolumn 5 & 6 för #vp-table (Justering flyttas närmare vänster) */
+#vp-table .col-adjust { 
+    width: 20%; 
+    text-align: center; 
+}
+
+#vp-table .col-actions { 
+    width: 25%; 
+    text-align: right; 
+}

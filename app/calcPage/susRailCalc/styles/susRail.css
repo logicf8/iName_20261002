@@ -1,0 +1,269 @@
+/*app\calcPage\susRailCalc\styles\susRail.css*/
+/* ==========================================================================
+   Upphängningsskena / Profilkalkylator (Anpassad till basdesign)
+   ========================================================================== */
+
+.sus-rail-card {
+  background-color: var(--bg-card);
+  padding: 20px;
+  border-radius: 0 0 8px 8px; /* Endast rundade hörn i botten */
+  border: 1px solid var(--border-main);
+  border-top: none; /* Ingen översta linje – ligger kloss an mot fliklinjen */
+  box-shadow: 0 8px 24px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0; /* Borttaget avstånd uppåt för att koppla ihop med flikarna */
+}
+
+/* Tabbar på samma rad */
+.sus-tabs-header {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-main);
+  margin-bottom: 0; /* Inget avstånd under flikarna */
+  flex-wrap: nowrap;
+}
+
+.sus-tab-btn {
+  flex: 1;
+  text-align: center;
+  background-color: var(--bg-main);
+  color: var(--text-button);
+  border: 1px solid var(--border-light);
+  border-bottom: none;
+  padding: 10px 12px;
+  border-radius: 6px 6px 0 0;
+  font-weight: 500;
+  font-size: 13px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+  margin-bottom: -1px; /* Täcker bottenlinjen för en snygg övergång */
+}
+
+.sus-tab-btn:hover {
+  background-color: var(--main-light);
+  color: var(--main);
+}
+
+.sus-tab-btn.active {
+  background-color: var(--main);
+  color: var(--text-light, #ffffff);
+  border-color: var(--main);
+  z-index: 1;
+}
+
+.sus-tab-content {
+  display: none;
+}
+
+.sus-tab-content.active {
+  display: block;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.sus-tab-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 12px; /* Säkerställer avstånd mellan rubrik och knapp */
+}
+
+.sus-tab-title-row h2 {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0; 
+}
+
+/* Radera beräkning (Anpassad bredd och högerställd) */
+.sus-clear-btn {
+  display: none;
+  width: auto;                  /* Bredden anpassas efter texten */
+  margin-left: auto;             /* Tvingar knappen att ligga längst till höger */
+  white-space: nowrap;           /* Förhindrar att texten radbryts */
+  background-color: #fde8e8;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 6px 12px;            /* Lagom padding så den blir något bredare än texten */
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.sus-clear-btn.visible {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sus-clear-btn:hover {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.sus-clear-btn:active {
+  transform: scale(0.96);
+}
+
+.sus-rail-desc {
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Inputhantering */
+.sus-rail-input-wrapper {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+.sus-input-field {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-size: 13px;
+  border: 1px solid var(--border-main);
+  border-radius: 4px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sus-input-field:focus {
+  border-color: var(--main);
+  box-shadow: 0 0 0 1px var(--main-light, rgba(0, 0, 0, 0.05));
+}
+
+/* Flödande tagg-lista för inmatade mått */
+.sus-rail-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.sus-list-item {
+  background-color: var(--surface-alt-2);
+  border: 1px solid var(--border-light);
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 550;
+  box-shadow: 0 0.5px 2px var(--shadow);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sus-list-item:hover {
+  background-color: #fde8e8;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.sus-remove-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.sus-calc-btn {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Resultatsektion */
+.sus-summary-box {
+  background-color: var(--surface-alt-2);
+  border: 1px solid var(--border-light);
+  padding: 12px;
+  border-radius: 6px;
+  margin: 15px 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.sus-rails-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sus-rail-item {
+  background-color: var(--surface-alt-2);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 10px 12px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.sus-rail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.sus-rail-badge {
+  background-color: var(--main);
+  color: var(--text-light, #ffffff);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sus-rail-usage {
+  font-size: 13px;
+}
+
+/* Framstegsindikator (Bar) */
+.sus-bar-container {
+  display: flex;
+  height: 24px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.sus-bar-segment {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.4);
+}
+
+.sus-bar-segment.waste {
+  background-color: var(--border-light);
+  color: var(--text-dark);
+  text-shadow: none;
+  font-weight: normal;
+}
+
+.sus-rail-details {
+  font-size: 13px;
+}
+
+.sus-empty-msg {
+  font-size: 13px;
+  text-align: center;
+  margin-top: 15px;
+}

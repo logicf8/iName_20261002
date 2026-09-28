@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Combobox Component Styles
+   ========================================================================== */
+
+.combobox-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 68px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    background-color: var(--bg-card);
+    box-sizing: border-box;
+    transition: border-radius 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    vertical-align: middle;
+}
+
+.combobox-container.open {
+    border-color: var(--main);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.combobox-container:focus-within {
+    border-color: var(--main);
+}
+
+.combobox-input {
+    width: 48px;
+    padding: 4px 5px;
+    border: none;
+    background: transparent;
+    color: var(--text-dark);
+    font-size: 13px;
+    outline: none;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.combobox-arrow {
+    width: 20px;
+    height: 100%;
+    min-height: 26px;
+    padding: 0;
+    border: none;
+    border-left: 1px solid var(--border-light);
+    background-color: var(--surface-alt-2);
+    color: var(--text-dark);
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
+
+.combobox-arrow:hover {
+    background-color: var(--main-light);
+    color: var(--main);
+}
+
+.combobox-dropdown {
+    display: none;
+    position: fixed;
+    background-color: var(--bg-card);
+    border: 1px solid var(--main);
+    border-top: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.06);
+    z-index: 9999;
+    box-sizing: border-box;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.combobox-container.open .combobox-dropdown {
+    display: block;
+}
+
+.combobox-item {
+    padding: 6px 8px;
+    font-size: 13px;
+    color: var(--text-dark);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.combobox-item:hover {
+    background-color: var(--main-light);
+    color: var(--main);
+}
+
+.combobox-item:last-child {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}

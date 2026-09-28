@@ -1,0 +1,113 @@
+/* app/calcPage/styles/components/buttons.css */
+
+/* ==========================================================================
+   Knappar (Gemensamma komponenter)
+   ========================================================================== */
+
+/* Åtgärdsknappar */
+.action-btn {
+  font-size: 14px;
+  padding: 10px 15px;
+  background-color: var(--surface-alt);
+  color: var(--text-dark);
+  border: 1px solid var(--border-main);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  background-color: var(--main-light);
+  border-color: var(--border-soft);
+  color: var(--main);
+}
+
+/* Rensa-knapp i ikonsformat */
+.clear-icon-button {
+  font-size: 16px;
+  background: none;
+  border: none;
+  color: var(--danger);
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  padding: 2px 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  vertical-align: middle;
+}
+
+.clear-icon-button:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0px 0px 2px rgba(211, 19, 19, 0.4));
+}
+
+.clear-icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Kontrollknappar längst ned */
+.control-btn {
+  font-size: 14px;
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.clear-all-btn {
+  background-color: var(--danger);
+  color: var(--text-light);
+}
+
+.clear-all-btn:hover {
+  background-color: #b51010;
+}
+
+/* Enhetliga tabellknappar för alla rader */
+.table-copy-btn,
+.chain-row-btn {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--border-main);
+  border-radius: 4px;
+  background-color: var(--surface-alt);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  white-space: nowrap !important;
+  line-height: 1;
+}
+
+.table-copy-btn:hover,
+.chain-row-btn:hover {
+  background-color: var(--main-light);
+  color: var(--main);
+  border-color: var(--border-soft);
+}
+
+.table-copy-btn:active,
+.chain-row-btn:active {
+  transform: scale(0.95);
+}
+
+.table-copy-btn.copied {
+  background-color: var(--main);
+  color: #ffffff;
+  border-color: var(--main);
+}

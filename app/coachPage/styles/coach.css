@@ -1,0 +1,13 @@
+/* ===== Imports ===== */
+@import "components/coachHeader.css";
+@import "components/expandable.css";
+@import "components/statusRadio.css";
+@import "components/quillCustom.css";
+@import "components/print.css";
+
+/* ===== Huvudwrapper ===== */
+.coach-main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

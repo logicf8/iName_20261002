@@ -1,0 +1,80 @@
+/*app\coachPage\styles\components\coachHeader.css*/
+/* Top-fält (Coach, Säljare, Kund) och logotyp */
+
+.coach-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  margin-top: -8px;
+  margin-bottom: -20px;
+}
+
+.coach-field-group {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.coach-fixed {
+  flex: 0 0 auto;
+}
+
+.coach-fixed input[type="text"] {
+  width: 85px;
+}
+
+.coach-fill {
+  flex: 1;
+}
+
+.coach-fill input[type="text"] {
+  width: 100%;
+}
+
+.coach-field-group label {
+  font-weight: 700;
+  color: var(--main);
+  white-space: nowrap;
+}
+
+.coach-field-group input[type="text"] {
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 13px;
+  text-align: left;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+}
+
+.coach-field-group input[type="text"]:focus {
+  outline: none;
+  border-color: var(--main);
+}
+
+.coach-field-group.coach-fill {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+#customerText {
+  width: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.coach-logo {
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--main);
+  line-height: 1;
+  padding: 20px 8px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  user-select: none;
+}

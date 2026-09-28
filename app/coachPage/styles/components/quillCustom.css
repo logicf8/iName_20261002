@@ -1,0 +1,38 @@
+/*app\coachPage\styles\components\quillCustom.css*/
+/* Custom-anpassningar för Quill-editorn */
+
+.expandable-container .ql-container {
+  font-family: inherit;
+  font-size: 13px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  min-height: 42px;
+  height: auto;
+}
+
+.expandable-container .ql-editor {
+  min-height: 42px;
+  height: auto;
+  overflow-y: hidden;
+  padding: 8px 12px;
+}
+
+.expandable-container .ql-toolbar {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #fafafa;
+}
+
+.expandable-container .ql-editor ol,
+.expandable-container .ql-editor ul {
+  padding-left: 1em;
+}
+
+.expandable-container .ql-editor li {
+  padding-left: 0.4em;
+}
+
+.expandable-container.disabled-state .ql-toolbar,
+.expandable-container.disabled-state .ql-container {
+  display: none !important;
+}

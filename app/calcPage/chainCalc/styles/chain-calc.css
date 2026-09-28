@@ -1,0 +1,309 @@
+/* app/calcPage/styles/chain-calc.css */
+
+/* ==========================================================================
+   Kedjekalkylator (Specifik för chainCalc)
+   ========================================================================== */
+
+/* Spegla-knapp i headern */
+.calc-container .mirror-button {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s ease;
+  padding: 2px;
+  color: var(--main);
+}
+
+.calc-container .mirror-button:hover {
+  transform: scale(1.2);
+}
+
+.calc-container .mirror-button:active {
+  transform: scale(0.95);
+}
+
+/* Rad 1: Diskho och Häll delar 50/50 på bredden */
+.calc-container .action-buttons-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.calc-container .action-buttons-row .action-btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* Dölj tomma containers så flex-gap inte skapar onödigt tomrum */
+.calc-container div:empty {
+  display: none !important;
+}
+
+/* Rad 2: Togglar för djupavdrag och COS/COB */
+.calc-container .toggles-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 5px;
+}
+
+/* Containers för dolda alternativ */
+.calc-container .depth-deduction-container,
+.calc-container .cos-container,
+.calc-container .hallskarv-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Dynamiska grupper som fälls ut vid switch */
+.calc-container .radio-group,
+.calc-container .cos-group,
+.calc-container .hallskarv-group {
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  max-width: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.25s ease, transform 0.25s ease, max-width 0.25s ease, visibility 0.25s ease;
+  overflow: hidden;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Visa grupper när tillhörande toggle aktiveras */
+.calc-container .switch:has(input:checked) ~ .radio-group {
+  opacity: 1;
+  visibility: visible;
+  max-width: 550px;
+  transform: translateX(0);
+  margin-left: 5px;
+}
+
+.calc-container .switch:has(#cos-toggle:checked) ~ .cos-group {
+  opacity: 1;
+  visibility: visible;
+  max-width: 600px;
+  transform: translateX(0);
+  margin-left: 5px;
+}
+
+.calc-container .hallskarv-container:has(#hallskarv-toggle:checked) .hallskarv-group {
+  opacity: 1;
+  visibility: visible;
+  max-width: 600px;
+  transform: translateX(0);
+  margin-left: 5px;
+}
+
+/* Inputs & Selects i toggleraderna */
+.calc-container .depth-input {
+  width: 50px;
+  font-size: 14px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  text-align: center;
+  outline: none;
+  background-color: var(--bg-card);
+}
+
+.calc-container .depth-input:focus {
+  border-color: var(--main);
+}
+
+.calc-container .radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  user-select: none;
+}
+
+.calc-container .radio-label input[type="radio"] {
+  margin: 0;
+  accent-color: var(--main);
+  display: inline-block !important;
+}
+
+.calc-container .radio-group:has(input[value="right"]:checked) #depth-value-left {
+  display: none;
+}
+
+.calc-container .radio-group:has(input[value="left"]:checked) #depth-value-right {
+  display: none;
+}
+
+.calc-container .cos-select {
+  font-size: 14px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  outline: none;
+  background-color: var(--bg-card);
+}
+
+.calc-container .cos-select:focus {
+  border-color: var(--main);
+}
+
+/* Kedjekalkylatorns unika knappar & lista */
+.calc-container .chain-btn {
+  background-color: var(--main);
+  color: var(--text-light);
+  flex-grow: 1;
+  text-align: center;
+}
+
+.calc-container .chain-btn:hover {
+  background-color: var(--main-dark);
+}
+
+.calc-container .calculations-btn-container {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.calc-container .calculations-full-btn {
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 12px;
+  background-color: var(--main);
+  color: var(--text-light);
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  text-align: center;
+  box-shadow: 0 4px 12px var(--shadow);
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.calc-container .calculations-full-btn:hover {
+  background-color: var(--main-dark);
+}
+
+.calc-container .calculations-full-btn:active {
+  transform: scale(0.995);
+}
+
+.calc-container .chains-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.calc-container .chain-block {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-alt-2);
+  border: 1px solid var(--border-light);
+  padding: 8px;
+  border-radius: 6px;
+  gap: 0px;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.calc-container .chain-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calc-container .cc-row {
+  border-top: 1px dashed var(--border-light);
+  padding-top: 6px;
+  margin-top: 2px;
+}
+
+.calc-container .chain-text-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.calc-container .cc-row .chain-text-label {
+  font-weight: normal;
+  padding-left: 10px;
+}
+
+.calc-container .chain-buttons-group {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.calc-container .chain-row-btn {
+  font-size: 12px;
+  padding: 5px 8px;
+  border: 1px solid var(--border-main);
+  background-color: var(--surface);
+  border-radius: 4px;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.calc-container .chain-row-btn:hover {
+  background-color: var(--main-light);
+  border-color: var(--border-soft);
+}
+
+.calc-container .chain-row-btn.delete-btn-style:hover {
+  background-color: #fde8e8;
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.calc-container .chain-row-btn.reverse-btn-style {
+  background-color: var(--surface-alt);
+  border-color: var(--border-main);
+}
+
+.calc-container .chain-row-btn.reverse-btn-style:hover {
+  background-color: var(--main-light);
+}
+
+/* Stil för VP-tabellens radio-knappar */
+.vp-radio-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.vp-radio-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.vp-radio-group input[type="radio"] {
+  margin: 0;
+  padding: 0;
+  accent-color: var(--main);
+}
+
+.vp-table-wrapper {
+  margin-top: 0;
+}
+
+/* Ta över kontrollen från flex-gap för alla tre kort/sektioner */
+.calc-container > #chain-table-wrapper,
+.calc-container > #vp-table-wrapper,
+.calc-container > .chains-container {
+  margin-top: 5px !important;
+  margin-bottom: 0 !important;
+}

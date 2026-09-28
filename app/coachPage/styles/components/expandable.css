@@ -1,0 +1,143 @@
+/*app\coachPage\styles\components\expandable.css*/
+/* Generella Expandabla Containrar och SäljaPro-understrukturer */
+
+.expandable-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.expandable-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 24px;
+  cursor: pointer;
+}
+
+.expandable-label {
+  font-weight: 700;
+  color: var(--main);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  line-height: 24px;
+}
+
+/* ===== Expand-knapp ===== */
+
+.expand-btn {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main);
+  transition: background-color 0.2s, transform 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.expand-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: var(--main);
+}
+
+.expand-btn::before {
+  content: "▼";
+  font-size: 10px;
+  transition: transform 0.2s ease;
+}
+
+.expand-btn.active {
+  background-color: var(--main);
+  color: #fff;
+  border-color: var(--main);
+}
+
+.expand-btn.active::before {
+  transform: rotate(180deg);
+}
+
+/* ===== Final Select Container ===== */
+
+#finalContainer .expandable-header {
+  width: 100%;
+}
+
+#finalContainer .final-select-group {
+  margin-left: 4px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+#finalContainer .final-dropdown {
+  width: 100%;
+  max-width: none;
+  height: 32px;
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* ===== Tillstånd när sektionen är ihopfälld ===== */
+
+.expandable-container.disabled-state {
+  background-color: #f0f0f0;
+  border-color: #ddd;
+  opacity: 0.7;
+  gap: 0;
+}
+
+.expandable-container.has-content {
+  background-color: var(--bg-card);
+  border-color: var(--border-light);
+  opacity: 1;
+}
+
+.expandable-container.disabled-state .expandable-label {
+  opacity: 1;
+  color: var(--main);
+}
+
+/* ===== SäljaPro Sub-containers ===== */
+
+.salja-pro-sub-wrapper {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  width: 100%;
+  padding-left: 4px;
+  box-sizing: border-box;
+}
+
+#saljaProMainContainer.disabled-state .salja-pro-sub-wrapper {
+  display: none !important;
+}
+
+#saljaProSubContainers {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 12px;
+}
+
+.salja-pro-sub-item {
+  margin-left: 0;
+  border: 1px solid var(--border-light);
+  width: 100%;
+  box-sizing: border-box;
+}

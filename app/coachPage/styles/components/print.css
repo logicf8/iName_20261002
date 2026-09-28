@@ -1,0 +1,217 @@
+/*app\coachPage\styles\components\print.css*/
+/* Utskriftsregler (@media print) */
+
+@page {
+  margin-top: 25mm;
+}
+
+@page :first {
+  margin-top: 6mm;
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .coach-main-wrapper {
+    border: none !important;
+    box-shadow: none !important;
+    text-align: left !important;
+  }
+
+  .expandable-container {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .expandable-container:not(.has-content) {
+    display: none !important;
+  }
+
+  .expandable-container.has-content {
+    display: flex !important;
+    background-color: #fff !important;
+    padding-bottom: 2px !important;
+    padding-top: 2px !important;
+    gap: 2px !important;
+  }
+
+  .expandable-container.has-content:not(.is-empty) .ql-container {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .expandable-container .ql-editor {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .expandable-container .ql-editor p,
+  .expandable-container .ql-editor ul,
+  .expandable-container .ql-editor ol,
+  .expandable-container .ql-editor li {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .expand-btn {
+    display: none !important;
+  }
+
+  /* --- HANTERING AV STATUSKNAPPAR VID UTSKRIFT --- */
+
+  .approved-group {
+    margin-left: 0 !important;
+  }
+
+  .approved-radio-label {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  .custom-checkbox,
+  .approved-radio,
+  input[type="radio"],
+  input[type="checkbox"] {
+    display: none !important;
+  }
+
+  .label-text-screen {
+    display: none !important;
+  }
+
+  .label-text-print {
+    display: inline-block !important;
+    font-weight: 600;
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  .approved-radio-label:has(.approved-radio:not(:checked)) {
+    display: none !important;
+  }
+
+  .approved-radio-label:has(.approved-radio:checked) {
+    display: inline-flex !important;
+  }
+
+  .approved-group:not(:has(.approved-radio:checked)) {
+    display: none !important;
+  }
+
+  .ql-toolbar {
+    display: none !important;
+  }
+
+  .ql-container.ql-snow {
+    border: none !important;
+  }
+
+  .final-select-group,
+  .final-dropdown {
+    display: none !important;
+  }
+
+  /* ===== TOMMA TEXTRUTOR (.is-empty) ===== */
+
+  .expandable-container.is-empty .ql-container,
+  .expandable-container.is-empty .ql-editor {
+    display: none !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .expandable-container.is-empty {
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /* ===== Utskriftsanpassning för SäljaPro ===== */
+
+  #saljaProMainContainer {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  #saljaProMainContainer.has-content .salja-pro-sub-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding-left: 0 !important;
+  }
+
+  .salja-pro-sub-item {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    width: 100% !important;
+  }
+
+  .salja-pro-sub-item.has-content:not(.is-empty) {
+    display: flex !important;
+    background-color: #fff !important;
+    margin-left: 0 !important;
+  }
+
+  .salja-pro-sub-item.is-empty {
+    display: none !important;
+  }
+
+  #saljaProMainContainer:has(.salja-pro-sub-item.has-content:not(.is-empty)) {
+    display: flex !important;
+    background-color: #fff !important;
+  }
+
+  /* ===== TÄTARE AVSTÅND FÖR COACH, SÄLJARE OCH KUND ===== */
+  .coach-field-group {
+    gap: 2px !important;
+    margin-top: 0 !important;
+  }
+
+  .coach-container {
+    gap: 28px !important;
+  }
+
+  /* ===== AVSLUTNINGSVIS (FINALCONTAINER) ===== */
+
+  #finalContainer .expandable-header {
+    display: none !important;
+  }
+
+  #finalContainer {
+    background-color: #f9fafb !important;
+    padding: 14px 18px !important;
+    margin-top: 24px !important;
+    margin-bottom: 12px !important;
+    page-break-inside: avoid;
+  }
+
+  #finalContainer.has-content {
+    display: block !important;
+  }
+
+  #finalContainer #finalText .ql-editor {
+    padding: 0 !important;
+    font-size: 11pt !important;
+    font-weight: normal !important;
+    line-height: 1.5 !important;
+    color: #111827 !important;
+  }
+
+  #finalContainer.is-empty:not(.has-content) {
+    display: none !important;
+  }
+}
