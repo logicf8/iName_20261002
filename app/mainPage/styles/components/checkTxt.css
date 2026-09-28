@@ -1,0 +1,240 @@
+/* ===== CheckTxt ===== */
+
+.checkTxtContainer {
+  display: none;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.checkTxtHeader {
+  width: 100%;
+  margin: 0 0 10px 0;
+  color: var(--main);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.checkItem {
+  display: flex;
+  gap: 8px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  padding: 6px 8px;
+  position: relative;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background-color: var(--bg-card);
+}
+
+.checkItem img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.checkZoom {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  background: transparent;
+  opacity: 0.05;
+  transition: opacity 0.2s ease;
+}
+
+.checkItem:hover .checkZoom {
+  opacity: 0.75;
+}
+
+.checkTextWrap {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
+}
+
+.checkRow1 {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  font-weight: 340;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkRow1 .infoEmoji {
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--main);
+}
+
+.checkRow1 .checkEmoji {
+  margin-left: auto;
+}
+
+.checkRow2 {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-height: 50px;
+  height: auto;
+}
+
+/* ===== Tooltip ===== */
+
+.infoEmoji {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--main);
+}
+
+.infoTooltip {
+  position: absolute;
+  display: inline-block;
+  max-width: 400px;
+  white-space: normal;
+  word-break: break-word;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.checkRow1 .infoEmoji:hover + .infoTooltip {
+  display: inline-block;
+}
+
+/* ===== Zoom ===== */
+
+.zoomResultContainer {
+  display: none;
+  flex: 1 1 100%;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.zoomResultContainer .zoomContent td {
+  vertical-align: middle;
+}
+
+.zoomResultContainer td:last-child {
+  display: table-cell;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.zoomContent pre {
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+.zoomNumber {
+  display: inline-block;
+  min-width: 24px;
+  text-align: center;
+  padding: 2px 6px;
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  font-weight: bold;
+  border-radius: 4px;
+  line-height: 1.2;
+}
+
+.closeZoom {
+  margin-top: 10px;
+}
+
+/* ===== Tables ===== */
+
+.zoomTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.zoomTable th,
+.zoomTable td {
+  border: 1px solid var(--border-light);
+  padding: 8px;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: pre-line;
+}
+
+.zoomTable th {
+  background-color: var(--bg-main);
+  font-weight: 600;
+}
+
+.zoomTable tr:nth-child(even) {
+  background-color: var(--bg-light);
+}
+
+.zoomTable--grid {
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 16px;
+}
+
+.zoomTable--grid th,
+.zoomTable--grid td {
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  white-space: pre-line;
+}
+
+.zoomTable th:not(:first-child),
+.zoomTable td:not(:first-child) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.zoomTable .zoomNumber {
+  display: inline-block;
+  margin: 4px;
+}
+
+/* Tvinga tabellerna att använda fast layout */
+#chain-table, #vp-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* Lås de första 4 gemensamma kolumnerna till exakt samma procentuella bredd */
+#chain-table .col-length,  #vp-table .col-length  { width: 20%; }
+#chain-table .col-depth,   #vp-table .col-height  { width: 20%; }
+#chain-table .col-kvadrat, #vp-table .col-kvadrat { width: 18%; }
+#chain-table .col-lopmeter, #vp-table .col-lopmeter { width: 18%; }
+
+/* Resterande utrymme för sista kolumnerna/knapparna */
+#chain-table .col-actions { width: 24%; }
+#vp-table .col-adjust     { width: 12%; }
+#vp-table .col-actions    { width: 12%; }

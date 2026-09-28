@@ -1,0 +1,5 @@
+/* app/mainPage/styles/mainPage.css */
+@import "components/layout.css";
+@import "components/displayList.css";
+@import "components/checkTxt.css";
+@import "components/pinSection.css";
